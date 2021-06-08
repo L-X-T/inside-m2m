@@ -310,7 +310,7 @@ This was quite easy, wasn't it? However, we can improve this solution a bit. Ide
         title = 'shell';
 
         constructor(private authLibService: AuthLibService) {
-            this.authLibService.login('Javier', null);
+            this.authLibService.login('Laura', null);
         }
 
     }
