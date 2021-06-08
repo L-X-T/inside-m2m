@@ -2,6 +2,13 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "paths": {
+      "auth-lib": [
+        "projects/auth-lib/src/public-api.ts",
+        "dist/auth-lib/auth-lib",
+        "dist/auth-lib"
+      ]
+    },
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
