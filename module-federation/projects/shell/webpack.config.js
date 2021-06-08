@@ -24,9 +24,9 @@ module.exports = {
     new ModuleFederationPlugin({
 
         // For hosts (please adjust)
-        remotes: {
+        /*remotes: {
             "mfe1": "mfe1@http://localhost:3000/remoteEntry.js",
-        },
+        },*/
 
         shared: {
           "@angular/core": { singleton: true, strictVersion: true },
