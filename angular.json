@@ -49,7 +49,8 @@
             "aot": true,
             "assets": [
               "apps/flight-app/src/favicon.ico",
-              "apps/flight-app/src/assets"
+              "apps/flight-app/src/assets",
+              "apps/flight-app/src/manifest.webmanifest"
             ],
             "styles": [
               "apps/flight-app/src/styles.css",
@@ -58,7 +59,9 @@
               "apps/flight-app/src/assets/css/demo.css",
               "apps/flight-app/src/assets/css/themify-icons.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "serviceWorker": true,
+            "ngswConfigPath": "apps/flight-app/ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -520,7 +523,7 @@
       "prefix": "flight-workspace",
       "architect": {
         "build": {
-          "builder": "ngx-build-plus:browser",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/apps/external",
             "index": "apps/external/src/index.html",
@@ -568,7 +571,7 @@
           }
         },
         "serve": {
-          "builder": "ngx-build-plus:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "external:build"
           },
@@ -594,7 +597,7 @@
           }
         },
         "test": {
-          "builder": "ngx-build-plus:karma",
+          "builder": "@angular-devkit/build-angular:karma",
           "outputs": [
             "coverage/apps/external"
           ],
