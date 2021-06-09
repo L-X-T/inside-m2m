@@ -13,6 +13,19 @@ export class AppComponent {
     private swUpdate: SwUpdate,
   ) {
     this.setupUpdates();
+
+    if (typeof window === 'object') {
+      window.addEventListener('beforeinstallprompt', (e: any) => {
+        console.log('beforeinstallprompt')
+
+        this.snackBar.open('Install on Desktop?', 'OK')
+          .onAction().subscribe(_ => {
+          e.prompt();
+        });
+
+        e.userChoice.then(choice => console.log('user choice', choice));
+      });
+    }
   }
 
   setupUpdates(): void {
