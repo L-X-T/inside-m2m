@@ -2,6 +2,7 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit } from '@angular/core';
 import { Flight, FlightService } from '@flight-workspace/flight-lib';
+import { LocalBasketService } from '../local-basket.service';
 
 @Component({
   selector: 'flight-search',
@@ -18,7 +19,7 @@ export class FlightSearchComponent implements OnInit {
     5: true
   };
 
-  constructor(private flightService: FlightService) {}
+  constructor(private flightService: FlightService, private localBasketService: LocalBasketService) {}
 
   get flights(): Flight[] {
     return this.flightService.flights;
@@ -34,5 +35,19 @@ export class FlightSearchComponent implements OnInit {
 
   delay(): void {
     this.flightService.delay();
+  }
+
+  saveBasket(): void {
+    this.localBasketService.save(this.basket).then(
+      _ => console.log('successfully saved basket"'),
+      err => console.error('error saving basket', err)
+    )
+  }
+
+  loadBasket(): void {
+    this.localBasketService.load().then(
+      basket => { this.basket = basket; },
+      err => console.error('error loading basket', err)
+    );
   }
 }
