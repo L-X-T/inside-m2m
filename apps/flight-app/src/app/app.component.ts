@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
+import { SwPush, SwUpdate } from '@angular/service-worker';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -11,6 +11,7 @@ export class AppComponent {
   constructor(
     private snackBar: MatSnackBar,
     private swUpdate: SwUpdate,
+    private swPush: SwPush,
   ) {
     this.setupUpdates();
 
@@ -36,5 +37,24 @@ export class AppComponent {
     });
 
     this.swUpdate.checkForUpdate();
+
+    this.setupPush();
+  }
+
+  setupPush(): void {
+    const key = 'BBc7Bb5f5CRJp7cx19kPHz5d9S5jFSzogxEj2V1C44WuhTwd78tnXLPzOxGe0bUmKJUTAMemSKFzyQjSBN_-XyE';
+
+    this.swPush.requestSubscription({
+      serverPublicKey: key
+    }).then(sub => {
+        console.log('Push Subscription', JSON.stringify(sub) );
+      },
+      err => {
+        console.error('error registering for push', err);
+      });
+
+    this.swPush.messages.subscribe(push => {
+      console.log('received push message', push);
+    });
   }
 }
